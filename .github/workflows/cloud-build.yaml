@@ -5,7 +5,7 @@ jobs:
   setup:
     runs-on: ubuntu-latest
     steps:
-      - use: actions/checkout@v3
+      - uses: actions/checkout@v3
         name: Checkout change code
       - env:
           gcp_service_key: ${{ secret.GCP_SERVICE_ACCOUNT_KEY }}
