@@ -1,0 +1,21 @@
+name: Data Pipeline trigger
+run-name: Trigger build on branch ${{ github.github_ref_name }}
+on: [push]
+jobs:
+  setup:
+    runs-on: ubuntu-latest
+    steps:
+      - use: actions/checkout@v3
+        name: Checkout change code
+      - env:
+          gcp_service_key: ${{ secret.GCP_SERVICE_ACCOUNT_KEY }}
+        run: |
+          echo "${gcp_service_key}" >| gcp_service_key.json
+  build:
+    needs: setup
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check key file exists
+        run: |
+          pwd
+          [[ -f gcp_service_key.json ]] && echo 'Yes'
