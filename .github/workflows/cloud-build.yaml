@@ -18,4 +18,4 @@ jobs:
       - name: Check key file exists
         run: |
           pwd
-          [[ -f gcp_service_key.json ]] && echo 'Yes'
+          [[ -f 'gcp_service_key.json' ]] && echo 'Yes'
