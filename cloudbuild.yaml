@@ -13,21 +13,11 @@
 #   limitations under the License.
 
 steps:
-  - id: 'Unit testing'
-    name: python:3.7-slim-stretch
-    args: ["./run_unit_tests.sh"]
-
   - id: 'Build dataflow template'
     name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
-    entrypoint: 'gcloud'
+    entrypoint: 'bash'
     args: [ 
-      'dataflow', 
-      'flex-template', 
-      'build',
-      '${TEMPLATE_GCS_LOCATION}',
-      '--image=gcr.io/${PROJECT_ID}/${IMAGE_NAME}:${SHORT_SHA}',
-      '--sdk-language=PYTHON', 
-      '--metadata-file=template_spec/metadata.json'
+      'test.sh'
     ]
     secretEnv: [ 'TEMPLATE_GCS_LOCATION' ]
 
@@ -40,5 +30,5 @@ options:
 availableSecrets:
   secretManager:
     - versionName: "projects/${PROJECT_ID}/secrets/pipeline_dataflow_template_location/versions/latest"
-      env: TEMPLATE_GCS_LOCATION
+      env: 'TEMPLATE_GCS_LOCATION'
 
