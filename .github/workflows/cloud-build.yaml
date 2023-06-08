@@ -11,11 +11,3 @@ jobs:
           gcp_service_key: ${{ secrets.GCP_SERVICE_ACCOUNT_KEY }}
         run: |
           echo "${gcp_service_key}" >| gcp_service_key.json
-  build:
-    needs: setup
-    runs-on: ubuntu-latest
-    steps:
-      - name: Check key file exists
-        run: |
-          pwd
-          [[ -f 'gcp_service_key.json' ]] && echo 'Yes'
