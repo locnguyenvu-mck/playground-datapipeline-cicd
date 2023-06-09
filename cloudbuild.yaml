@@ -13,22 +13,16 @@
 #   limitations under the License.
 
 steps:
-  - id: 'Build dataflow template'
-    name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
-    entrypoint: 'bash'
-    args: [ 
-      'test.sh'
-    ]
-    secretEnv: [ 'TEMPLATE_GCS_LOCATION' ]
+  - id: 'Build the container image'
+    name: 'gcr.io/cloud-builders/docker'
+    entrypoint: bash
+    args: [ '-c', 'scripts/build-image.sh' ]
+    env:
+      - 'PROJECT_ID=$PROJECT_ID'
+      - 'SHORT_SHA=$SHORT_SHA'
 
 # To allow time for integration testing
 timeout: 1800s
 options:
-  env:
-    - 'IMAGE_NAME=ml_preproc'
   logging: CLOUD_LOGGING_ONLY
-availableSecrets:
-  secretManager:
-    - versionName: "projects/${PROJECT_ID}/secrets/pipeline_dataflow_template_location/versions/latest"
-      env: 'TEMPLATE_GCS_LOCATION'
 
