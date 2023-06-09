@@ -20,7 +20,6 @@ steps:
     env:
       - 'PROJECT_ID=$PROJECT_ID'
       - 'SHORT_SHA=$SHORT_SHA'
-      - 'REPO_NAME=$REPO_NAME'
       - 'TRIGGER_NAME=$TRIGGER_NAME'
       - 'BRANCH_NAME=$BRANCH_NAME'
 
