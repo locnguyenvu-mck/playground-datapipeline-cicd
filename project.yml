@@ -1,0 +1,5 @@
+pipelines:
+- name: pipeline01
+  path: pipelines/pipeline01
+- name: pipeline02
+  path: pipelines/pipeline02
